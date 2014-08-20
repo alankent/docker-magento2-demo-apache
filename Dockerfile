@@ -21,6 +21,9 @@ RUN a2enmod rewrite
 # Add the Apache virtual host file
 ADD config/apache_default_vhost /etc/apache2/sites-available/default
 
+# Add the MySQL client configuration file (no server settings)
+ADD config/my.cnf /etc/mysql/my.cnf
+
 # Install Magento 2
 RUN mkdir /var/www/magento2
 ADD config/composer.json /var/www/magento2/composer.json
