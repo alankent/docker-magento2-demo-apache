@@ -12,11 +12,11 @@ ENV APACHE_LOG_DIR /var/log/apache2
 RUN a2enmod rewrite
 
 # Add the Apache virtual host file
-ADD apache_default_vhost /etc/apache2/sites-available/default
+ADD config/apache_default_vhost /etc/apache2/sites-available/default
 
 ADD scripts/install-magento2 /tmp/install-magento2
 RUN bash -x /tmp/install-magento2
-ADD composer.json /tmp/install-magento2
+ADD config/composer.json /tmp/install-magento2
 
 EXPOSE 80
 
