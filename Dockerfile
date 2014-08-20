@@ -34,6 +34,5 @@ RUN bash -x /var/www/install-magento2
 EXPOSE 80
 
 # Start up the Apache server
-# (Commented out for now - we start up a bash shell instead while testing)
-#ENTRYPOINT ["/usr/sbin/apache2"]
-#CMD ["-D", "FOREGROUND"]
+ADD scripts/runserver /usr/local/bin/runserver
+ENTRYPOINT ["/usr/local/bin/runserver"]
