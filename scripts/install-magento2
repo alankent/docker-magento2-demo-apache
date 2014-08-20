@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# See also http://alankent.wordpress.com/2014/08/02/magento-2-progress-towards-installation-via-composer/
+
+mkdir /var/www/magento2
+cd /var/www/magento2 
+
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install -y
+
+cd htdocs
+php -f dev/tools/Magento/Tools/View/deploy.php
+php -f dev/tools/Magento/Tools/View/compiler.php
+
+chown www-data:www-data -R /var/www/magento2
