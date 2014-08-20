@@ -2,14 +2,18 @@
 
 # See also http://alankent.wordpress.com/2014/08/02/magento-2-progress-towards-installation-via-composer/
 
-mkdir /var/www/magento2
 cd /var/www/magento2 
 
+rm -rf htdocs
+mkdir -p htdocs
+
 curl -sS https://getcomposer.org/installer | php
-php composer.phar install -y
+php composer.phar install
 
 cd htdocs
 php -f dev/tools/Magento/Tools/View/deploy.php
-php -f dev/tools/Magento/Tools/View/compiler.php
+php -f dev/tools/Magento/Tools/Di/compiler.php
+
+echo "SetEnv MAGE_MODE production" >> .htaccess
 
 chown www-data:www-data -R /var/www/magento2
