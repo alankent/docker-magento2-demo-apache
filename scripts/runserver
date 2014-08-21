@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MySQL authentication
-MYSQLAUTH="--user=\"$MYSQL_USER\" --password=\"$MYSQL_PASSWORD\""
+MYSQLAUTH="--user=$MYSQL_USER --password=$MYSQL_PASSWORD"
 
 # Wait for MySQL to come up.
 until mysql $MYSQLAUTH -e ""; do
@@ -13,19 +13,42 @@ done
 mysql $MYSQLAUTH -e "CREATE DATABASE IF NOT EXISTS magento2;"
 
 # Create the Magento local.xml file
-sed < /var/www/magento2/htdocs/app/etc/local.xml.template \
-    -e "s/{{date}}/<![CDATA[`date`]]>/" \
-    -e "s/{{key}}/bfabadc79e44be389494390b63c42114/" \
-    -e "s/{{db_prefix}}//" \
-    -e "s/{{db_host}}/mysql/" \
-    -e "s/{{db_user}}/$MYSQL_USER/" \
-    -e "s/{{db_pass}}/$MYSQL_PASSWORD/" \
-    -e "s/{{db_name}}/magento2/" \
-    -e "s/{{db_init_statements}}/SET NAMES utf8/" \
-    -e "s/{{db_model}}/mysql4/" \
-    -e "s/{{session_save}}/files/" \
-    -e "s/{{backend_frontname}}/backend/" \
-    > /var/www/magento2/htdocs/app/etc/local.xml
+if [ ! -f /var/www/magento2/htdocs/app/etc/local.xml ]; then
+    php -f /var/www/magento2/htdocs/dev/shell/install.php -- \
+	--license_agreement_accepted yes \
+	--locale en_US \
+	--timezone "America/Los_Angeles" \
+	--default_currency USD \
+	--db_host mysql \
+	--db_name magento2 \
+	--db_user "$MYSQL_USER" \
+	--db_pass "$MYSQL_PASSWORD" \
+	--url "http://magento.local/" \
+	--use_rewrites no \
+	--use_secure_admin yes \
+	--admin_lastname Smith \
+	--admin_firstname John \
+	--admin_email "john.smith@some-email.com" \
+	--admin_username admin \
+	--admin_password admin123 \
+	--use_secure no \
+	--secure_base_url "https://magento.local" \
+        --skip_url_validation \
+	--cleanup_database
+fi
+#sed < /var/www/magento2/htdocs/app/etc/local.xml.template \
+    #-e "s/{{date}}/<![CDATA[`date`]]>/" \
+    #-e "s/{{key}}/bfabadc79e44be389494390b63c42114/" \
+    #-e "s/{{db_prefix}}//" \
+    #-e "s/{{db_host}}/mysql/" \
+    #-e "s/{{db_user}}/$MYSQL_USER/" \
+    #-e "s/{{db_pass}}/$MYSQL_PASSWORD/" \
+    #-e "s/{{db_name}}/magento2/" \
+    #-e "s/{{db_init_statements}}/SET NAMES utf8/" \
+    #-e "s/{{db_model}}/mysql4/" \
+    #-e "s/{{session_save}}/files/" \
+    #-e "s/{{backend_frontname}}/backend/" \
+    #> /var/www/magento2/htdocs/app/etc/local.xml
 
 # Run the web server
 echo exec /usr/sbin/apache2 -D FOREGROUND
