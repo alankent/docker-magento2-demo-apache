@@ -38,4 +38,5 @@ EXPOSE 80
 # Start up the Apache server
 ADD scripts/runserver /usr/local/bin/runserver
 RUN chmod +x /usr/local/bin/runserver
-#ENTRYPOINT ["/usr/local/bin/runserver"]
+ENTRYPOINT ["bash", "-c"]
+CMD ["/usr/local/bin/runserver"]
