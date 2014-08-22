@@ -1,0 +1,16 @@
+pub/sample_data.php
+lib/internal/Magento/Framework/Module/SampleData/SetupInterface.php
+lib/internal/Magento/Framework/Module/SampleData/SetupFactory.php
+lib/internal/Magento/Framework/Module/SampleData/Installer.php
+lib/internal/Magento/Framework/File/Csv/Reader.php
+lib/internal/Magento/Framework/App/SampleData.php
+app/code/Magento/ConfigurableProduct/etc/di.xml
+app/code/Magento/ConfigurableProduct/SampleData/fixtures/products_men_tops.csv
+app/code/Magento/ConfigurableProduct/SampleData/Setup/Product/Converter.php
+app/code/Magento/ConfigurableProduct/SampleData/Setup/Product.php
+app/code/Magento/Catalog/etc/di.xml
+app/code/Magento/Catalog/SampleData/fixtures/categories.csv
+app/code/Magento/Catalog/SampleData/fixtures/attributes.csv
+app/code/Magento/Catalog/SampleData/Setup/ImageHelper.php
+app/code/Magento/Catalog/SampleData/Setup/Category.php
+app/code/Magento/Catalog/SampleData/Setup/Attribute.php
