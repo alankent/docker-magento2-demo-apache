@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y apache2 mysql-client php5 php5-curl php
 
 # mcrypt.ini appears to be missing from apt-get install. Needed for PHP mcrypt library to be enabled.
 ADD config/20-mcrypt.ini /etc/php5/cli/conf.d/20-mcrypt.ini
+ADD config/20-mcrypt.ini /etc/php5/apache2/conf.d/20-mcrypt.ini
 
 # Environment variables from /etc/apache2/apache2.conf
 ENV APACHE_RUN_USER www-data
@@ -19,7 +20,8 @@ ENV APACHE_PID_FILE /var/run/apache2/apache2.pid
 RUN a2enmod rewrite
 
 # Add the Apache virtual host file
-ADD config/apache_default_vhost /etc/apache2/sites-available/default
+ADD config/apache_default_vhost /etc/apache2/sites-enabled/magento2.conf
+RUN rm -f /etc/apache2/sites-enabled/000-default.conf
 
 # Add the MySQL client configuration file (no server settings)
 ADD config/my.cnf /etc/mysql/my.cnf
@@ -53,4 +55,6 @@ EXPOSE 80
 
 # Start up the Apache server
 ADD scripts/runserver /usr/local/bin/runserver
-ENTRYPOINT ["/usr/local/bin/runserver"]
+RUN chmod +x /usr/local/bin/runserver
+ENTRYPOINT ["bash", "-c"]
+CMD ["/usr/local/bin/runserver"]

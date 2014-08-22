@@ -14,6 +14,7 @@ cd htdocs
 php -f dev/tools/Magento/Tools/View/deploy.php
 php -f dev/tools/Magento/Tools/Di/compiler.php
 
-echo "SetEnv MAGE_MODE production" >> .htaccess
+#echo "SetEnv MAGE_MODE production" >> .htaccess
+echo "SetEnv MAGE_MODE developer" >> .htaccess
 
 chown www-data:www-data -R /var/www/magento2

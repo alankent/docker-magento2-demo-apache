@@ -3,7 +3,7 @@
   DocumentRoot /var/www/magento2/htdocs
 
   <Directory /var/www/magento2/htdocs>
-    Options Indexes FollowSymLinks -MultiViews
+    Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
     allow from all
