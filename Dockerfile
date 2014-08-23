@@ -33,22 +33,23 @@ ADD scripts/install-magento2 /var/www/install-magento2
 RUN bash -x /var/www/install-magento2
 
 # Hack install previes of setup scripts
-ADD luma/sample_data.php /var/www/magento2/htdocs/pub/sample_data.php
-ADD luma/SetupInterface.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/Module/SampleData/SetupInterface.php
-ADD luma/SetupFactory.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/Module/SampleData/SetupFactory.php
-ADD luma/Installer.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/Module/SampleData/Installer.php
-ADD luma/Reader.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/File/Csv/Reader.php
-ADD luma/SampleData.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/App/SampleData.php
-ADD luma/configurable-product-di.xml /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/etc/di.xml
-ADD luma/products_men_tops.csv /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/SampleData/fixtures/products_men_tops.csv
-ADD luma/Converter.php /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/SampleData/Setup/Product/Converter.php
-ADD luma/Product.php /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/SampleData/Setup/Product.php
-ADD luma/catalog-etc-di.xml /var/www/magento2/htdocs/app/code/Magento/Catalog/etc/di.xml
-ADD luma/categories.csv /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/fixtures/categories.csv
-ADD luma/attributes.csv /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/fixtures/attributes.csv
-ADD luma/ImageHelper.php /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/Setup/ImageHelper.php
-ADD luma/Category.php /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/Setup/Category.php
-ADD luma/Attribute.php /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/Setup/Attribute.php
+#ADD luma/sample_data.php /var/www/magento2/htdocs/pub/sample_data.php
+#ADD luma/SetupInterface.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/Module/SampleData/SetupInterface.php
+#ADD luma/SetupFactory.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/Module/SampleData/SetupFactory.php
+#ADD luma/Installer.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/Module/SampleData/Installer.php
+#ADD luma/Reader.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/File/Csv/Reader.php
+#ADD luma/SampleData.php /var/www/magento2/htdocs/lib/internal/Magento/Framework/App/SampleData.php
+#ADD luma/configurable-product-di.xml /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/etc/di.xml
+#ADD luma/products_men_tops.csv /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/SampleData/fixtures/products_men_tops.csv
+#ADD luma/Converter.php /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/SampleData/Setup/Product/Converter.php
+#ADD luma/Product.php /var/www/magento2/htdocs/app/code/Magento/ConfigurableProduct/SampleData/Setup/Product.php
+#ADD luma/catalog-etc-di.xml /var/www/magento2/htdocs/app/code/Magento/Catalog/etc/di.xml
+#ADD luma/categories.csv /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/fixtures/categories.csv
+#ADD luma/attributes.csv /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/fixtures/attributes.csv
+#ADD luma/ImageHelper.php /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/Setup/ImageHelper.php
+#ADD luma/Category.php /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/Setup/Category.php
+#ADD luma/Attribute.php /var/www/magento2/htdocs/app/code/Magento/Catalog/SampleData/Setup/Attribute.php
+ADD media /var/www/magento/htdocs/pub/media/catalog/product/sample_data
 
 # Expose the web server port
 EXPOSE 80
