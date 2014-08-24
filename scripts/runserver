@@ -40,5 +40,8 @@ if [ ! -f /var/www/magento2/htdocs/app/etc/local.xml ]; then
 	--cleanup_database
 fi
 
+# Until the sample data loading script is available, load up this database dump.
+mysql $MYSQLAUTH magento2 < /var/www/magento2/magento2.sql
+
 # Run the web server
 exec /usr/sbin/apache2 -D FOREGROUND
