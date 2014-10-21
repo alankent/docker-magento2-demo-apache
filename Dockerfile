@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 MAINTAINER Alan Kent
 
 # Get Apache, mysql client, PHP etc (subset of a full LAMP stack - no MySQL server)
-RUN apt-get update && apt-get install -y apache2 mysql-client php5 php5-curl php5-mcrypt php5-gd php5-mysql curl git
+RUN apt-get update && apt-get install -y apache2 mysql-client php5 php5-curl php5-mcrypt php5-gd php5-mysql php5-intl curl git
 
 # mcrypt.ini appears to be missing from apt-get install. Needed for PHP mcrypt library to be enabled.
 ADD config/20-mcrypt.ini /etc/php5/cli/conf.d/20-mcrypt.ini

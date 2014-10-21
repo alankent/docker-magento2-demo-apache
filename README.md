@@ -31,7 +31,7 @@ several additional environment variables.
     docker run --rm --name magento2 -p 80:80 --link mysql:mysql \
        -e MYSQL_USER=root -e MYSQL_PASSWORD=admin \
        -e PUBLIC_HOST=yourhost.example.com \
-       alankent/docker-magento2-demo-apache:0.1.0-alpha89
+       alankent/docker-magento2-demo-apache:0.1.0-alpha100
 
 To use the panamax template this will all be set up for you, although
 you will need to change the PUBLIC_HOST as Magento uses this to form

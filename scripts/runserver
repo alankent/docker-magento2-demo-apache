@@ -12,36 +12,35 @@ until mysql $MYSQLAUTH -e ""; do
     sleep 1
 done
 
-# Create the database.
+# Ensure we have a fresh database.
+mysql $MYSQLAUTH -e "DROP DATABASE IF EXISTS magento2;"
 mysql $MYSQLAUTH -e "CREATE DATABASE IF NOT EXISTS magento2;"
 
 # Create the Magento local.xml file
 if [ ! -f /var/www/magento2/htdocs/app/etc/local.xml ]; then
-    php -f /var/www/magento2/htdocs/dev/shell/install.php -- \
-	--license_agreement_accepted yes \
-	--locale en_US \
-	--timezone "America/Los_Angeles" \
-	--default_currency USD \
-	--db_host mysql \
-	--db_name magento2 \
-	--db_user "$MYSQL_USER" \
-	--db_pass "$MYSQL_PASSWORD" \
-	--url "http://$PUBLIC_HOST/" \
-	--use_rewrites no \
-	--use_secure_admin yes \
-	--admin_lastname Smith \
-	--admin_firstname John \
-	--admin_email "john.smith@some-email.com" \
-	--admin_username admin \
-	--admin_password admin123 \
-	--use_secure no \
-	--secure_base_url "https://$PUBLIC_HOST/" \
-        --skip_url_validation \
-	--cleanup_database
+    (
+	cd /var/www/magento2/htdocs/setup
+	php -f index.php install \
+		--db_host=mysql \
+		--db_name=magento2 \
+		--db_user="$MYSQL_USER" \
+		--db_pass="$MYSQL_PASSWORD" \
+		--backend_frontname=admin \
+		--base_url=http://$PUBLIC_HOST/ \
+		--language=en_US \
+		--timezone=America/Los_Angeles \
+		--currency=USD \
+		--admin_lastname=Smith \
+		--admin_firstname=John \
+		--admin_email=a@m.com \
+		--admin_username=admin \
+		--admin_password=admin123 \
+		--use_secure=0
+    )
 fi
 
 # Until the sample data loading script is available, load up this database dump.
-mysql $MYSQLAUTH magento2 < /var/www/magento2/magento2.sql
+#mysql $MYSQLAUTH magento2 < /var/www/magento2/magento2.sql
 
 # Run the web server
 exec /usr/sbin/apache2 -D FOREGROUND
