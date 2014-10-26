@@ -28,7 +28,7 @@ several additional environment variables.
     docker run --rm --name magento2 -p 80:80 --link mysql:mysql \
        -e MYSQL_USER=root -e MYSQL_PASSWORD=admin \
        -e PUBLIC_HOST=yourhost.example.com \
-       alankent/docker-magento2-demo-apache:0.1.0-alpha100
+       alankent/docker-magento2-demo-apache:0.1.0-alpha101
 
 When this container is started, it loops waiting for a succesful
 connection to the MySQL database. Once achieved it runs a PHP script
@@ -53,3 +53,6 @@ intended for production usage!)
 
 Be aware if you start a new container instance, it will wipe the
 database and start again.
+
+This script currently does not load up any products - it is more to
+demonstrate the installation steps. Sample data is "coming soon".

@@ -32,15 +32,12 @@ if [ ! -f /var/www/magento2/htdocs/app/etc/local.xml ]; then
 		--currency=USD \
 		--admin_lastname=Smith \
 		--admin_firstname=John \
-		--admin_email=a@m.com \
+		--admin_email=john.smith@example.com \
 		--admin_username=admin \
 		--admin_password=admin123 \
 		--use_secure=0
     )
 fi
-
-# Until the sample data loading script is available, load up this database dump.
-#mysql $MYSQLAUTH magento2 < /var/www/magento2/magento2.sql
 
 # Run the web server
 exec /usr/sbin/apache2 -D FOREGROUND
