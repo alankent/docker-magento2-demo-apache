@@ -2,7 +2,7 @@
   "name": "alankent/store",
   "require": {
     "magento/magento-composer-installer": "*",
-    "magento/product-community-edition": "0.1.0-alpha101"
+    "magento/product-community-edition": "0.1.0-alpha102"
   },
   "repositories": [
     {

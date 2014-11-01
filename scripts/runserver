@@ -12,15 +12,12 @@ until mysql $MYSQLAUTH -e ""; do
     sleep 1
 done
 
-# Ensure we have a fresh database.
-mysql $MYSQLAUTH -e "DROP DATABASE IF EXISTS magento2;"
-mysql $MYSQLAUTH -e "CREATE DATABASE IF NOT EXISTS magento2;"
-
 # Create the Magento local.xml file
 if [ ! -f /var/www/magento2/htdocs/app/etc/local.xml ]; then
     (
 	cd /var/www/magento2/htdocs/setup
 	php -f index.php install \
+		--cleanup_database \
 		--db_host=mysql \
 		--db_name=magento2 \
 		--db_user="$MYSQL_USER" \
