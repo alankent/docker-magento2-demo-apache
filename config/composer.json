@@ -2,7 +2,7 @@
   "name": "alankent/store",
   "require": {
     "magento/magento-composer-installer": "*",
-    "magento/product-community-edition": "0.1.0-alpha102"
+    "magento/product-community-edition": "0.1.0-alpha104"
   },
   "repositories": [
     {
@@ -14,5 +14,42 @@
     "magento-root-dir": "htdocs",
     "magento-deploystrategy": "copy"
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "autoload": {
+        "psr-0": {
+            "Apache_": "htdocs/lib/internal/",
+            "Cm_": "htdocs/lib/internal/",
+            "Credis_": "htdocs/lib/internal/",
+            "Less_": "htdocs/lib/internal/",
+            "Symfony\\": "htdocs/lib/internal/",
+            "Zend_Date": "htdocs/app/code/",
+            "Zend_Mime": "htdocs/app/code/",
+            "Zend_": "htdocs/lib/internal/",
+            "Zend\\": "htdocs/lib/internal/"
+        },
+        "psr-4": {
+            "Magento\\Framework\\": "htdocs/lib/internal/Magento/Framework/",
+            "Magento\\": [
+                "htdocs/var/generation/Magento/",
+                "htdocs/app/code/Magento/"
+            ],
+            "Zend\\Soap\\": "htdocs/app/code/Zend/Soap/",
+            "Zend\\": "htdocs/lib/internal/Zend/"
+        }
+    },
+    "include-path": [
+        "/htdocs/lib/internal/",
+        "/htdocs/app/code/"
+    ],
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "htdocs/dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "htdocs/dev/tools/Magento/Tools/",
+            "Magento\\Tools\\License\\": "htdocs/dev/build/publication/license/",
+            "Magento\\Tools\\Sanity\\": "htdocs/dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "htdocs/dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "htdocs/dev/tests/static/framework/Magento/TestFramework/Utility/",
+            "Magento\\ToolkitFramework\\": "htdocs/dev/tools/performance-toolkit/framework/Magento/ToolkitFramework/"
+        }
+    }
 }
