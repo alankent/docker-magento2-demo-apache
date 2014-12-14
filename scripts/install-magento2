@@ -8,7 +8,7 @@ rm -rf htdocs
 mkdir -p htdocs
 
 curl -sS https://getcomposer.org/installer | php
-php composer.phar install --profile
+php composer.phar install
 
 cd htdocs
 php -f dev/tools/Magento/Tools/View/deploy.php
@@ -17,9 +17,5 @@ php -f dev/tools/Magento/Tools/Di/compiler.php
 # Use developer mode to get more detailed error diagnostics, at least for now.
 echo "SetEnv MAGE_MODE developer" >> .htaccess
 #echo "SetEnv MAGE_MODE production" >> .htaccess
-
-# Setup script is independent to main site - set it up too.
-cd setup
-COMPOSER_PROCESS_TIMEOUT=1000 php ../../composer.phar install --profile
 
 chown www-data:www-data -R /var/www/magento2

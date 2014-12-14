@@ -17,7 +17,13 @@ To run the default 'mysql' container, please name the container 'mysql'
 and expose port 3306 for the Magento 2 container to use. For the purpose
 of this demo, set the 'root' account password to 'admin'.
 
-    docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin mysql
+    docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin \
+       mysql:5.6
+
+Do check that it started up (the -d makes it run as a daemon in
+background) use
+
+    docker logs mysql
 
 An interestiong experiment for the reader is to replace the 'mysql'
 container with a Maria DB instance.
@@ -28,7 +34,7 @@ several additional environment variables.
     docker run --rm --name magento2 -p 80:80 --link mysql:mysql \
        -e MYSQL_USER=root -e MYSQL_PASSWORD=admin \
        -e PUBLIC_HOST=yourhost.example.com \
-       alankent/docker-magento2-demo-apache:0.1.0-alpha102
+       alankent/docker-magento2-demo-apache:0.1.0-alpha108
 
 When this container is started, it loops waiting for a succesful
 connection to the MySQL database. Once achieved it runs a PHP script

@@ -14,29 +14,24 @@ done
 
 mysql $MYSQLAUTH -e "CREATE DATABASE IF NOT EXISTS magento2"
 
-# Create the Magento local.xml file
-if [ ! -f /var/www/magento2/htdocs/app/etc/local.xml ]; then
-    (
-	cd /var/www/magento2/htdocs/setup
-	php -f index.php install \
-		--cleanup_database \
-		--db_host=mysql \
-		--db_name=magento2 \
-		--db_user="$MYSQL_USER" \
-		--db_pass="$MYSQL_PASSWORD" \
-		--backend_frontname=admin \
-		--base_url=http://$PUBLIC_HOST/ \
-		--language=en_US \
-		--timezone=America/Los_Angeles \
-		--currency=USD \
-		--admin_lastname=Smith \
-		--admin_firstname=John \
-		--admin_email=john.smith@example.com \
-		--admin_username=admin \
-		--admin_password=admin123 \
-		--use_secure=0
-    )
-fi
+cd /var/www/magento2/htdocs/setup
+php -f setup/index.php install \
+	--cleanup_database \
+	--db_host=mysql \
+	--db_name=magento2 \
+	--db_user="$MYSQL_USER" \
+	--db_pass="$MYSQL_PASSWORD" \
+	--backend_frontname=admin \
+	--base_url=http://$PUBLIC_HOST/ \
+	--language=en_US \
+	--timezone=America/Los_Angeles \
+	--currency=USD \
+	--admin_lastname=Smith \
+	--admin_firstname=John \
+	--admin_email=john.smith@example.com \
+	--admin_username=admin \
+	--admin_password=admin123 \
+	--use_secure=0
 
 # Run the web server
 exec /usr/sbin/apache2 -D FOREGROUND
