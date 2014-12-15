@@ -12,13 +12,13 @@ until mysql $MYSQLAUTH -e ""; do
     sleep 1
 done
 
-mysql $MYSQLAUTH -e "CREATE DATABASE IF NOT EXISTS magento2"
+mysql $MYSQLAUTH -e "CREATE DATABASE IF NOT EXISTS magento"
 
-cd /var/www/magento2/htdocs/setup
+cd /var/www/magento2/htdocs
 php -f setup/index.php install \
 	--cleanup_database \
 	--db_host=mysql \
-	--db_name=magento2 \
+	--db_name=magento \
 	--db_user="$MYSQL_USER" \
 	--db_pass="$MYSQL_PASSWORD" \
 	--backend_frontname=admin \
@@ -32,6 +32,10 @@ php -f setup/index.php install \
 	--admin_username=admin \
 	--admin_password=admin123 \
 	--use_secure=0
+
+# In production mode we pre-compute various files
+php -f dev/tools/Magento/Tools/View/deploy.php
+php -f dev/tools/Magento/Tools/Di/compiler.php
 
 # Run the web server
 exec /usr/sbin/apache2 -D FOREGROUND
